@@ -1,6 +1,4 @@
 #include "main.h"
-#include <stddef.h>
-
 
 /**
  * _printf - produces output according to a format.
@@ -10,35 +8,40 @@
  */
 int _printf(const char *format, ...)
 {
+	int i = 0, n_printed = 0;
+	int (*f)(va_list);
 	va_list args;
-	unsigned int i = 0, n_printed = 0;
-	char current_char = '\0', next_char = '\0';
 
 	va_start(args, format);
-	if (format != NULL)
+	if (format == NULL || !format[i + 1])
+		return (-1);
+	while (format[i])
 	{
-		while (format[i] != '\0')
+		if (format[i] == '%')
 		{
-			current_char = format[i];
-			if (current_char == '%')
+			if (format[i + 1])
 			{
-				next_char = format[++i];
-				if (next_char == '%')
-					_putchar('%');
-				else if (next_char == 'c')
-					_putchar(va_arg(args, int));
-				else if (next_char == 's')
-					_print_string(va_arg(args, char *));
-				else if (next_char == '\0')
-					break;
-				i++;
-				continue;
+				if (format[i + 1] != 'c' && format[i + 1] != 's' && format[i + 1] != '%')
+				{
+					n_printed += _putchar(format[i]);
+					n_printed += _putchar(format[i + 1]);
+					i++;
+				}
+				else
+				{
+					f = get_func(&format[i + 1]);
+					n_printed += f(args);
+					i++;
+				}
 			}
-			_putchar(current_char);
-			i++;
 		}
+		else
+		{
+			_putchar(format[i]);
+			n_printed++;
+		}
+		i++;
 	}
 	va_end(args);
-	_putchar(-1);
 	return (n_printed);
 }
