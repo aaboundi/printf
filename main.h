@@ -3,26 +3,26 @@
 
 #include <stdlib.h>
 #include <stdarg.h>
-
-int _putchar(char c);
-int _print_string(const char *s);
-int _printf(const char *format, ...);
+#include <stdio.h>
+#include <limits.h>
+#include <string.h>
 
 /**
- * struct flags - struct containing flags to "turn on"
- * when a flag specifier is passed to _printf()
- * @plus: flag for the '+' character
- * @space: flag for the ' ' character
- * @hash: flag for the '#' character
+ * struct func_type - type structure
+ * @t: pointer to the argument
+ * @f: pointer-function associated with the argumen
  */
-typedef struct flags
+typedef struct func_type
 {
-	int plus;
-	int space;
-	int hash;
-} flags_t;
+	char *t;
+	int (*f)(va_list);
+} func_t;
 
-/* get_flag */
-int get_flag(char s, flags_t *f);
+int (*get_func(const char *format))(va_list);
+int _putchar(char c);
+int _printf(const char *format, ...);
+int print_str(va_list args);
+int print_char(va_list args);
+int print_pct(va_list args);
 
 #endif /* MAIN_H */
