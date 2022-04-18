@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stddef.h>
 
 
 /**
@@ -14,27 +15,30 @@ int _printf(const char *format, ...)
 	char current_char = '\0', next_char = '\0';
 
 	va_start(args, format);
-
 	if (format != NULL)
 	{
 		while (format[i] != '\0')
 		{
 			current_char = format[i];
-
-			/* TODO: check if current_char is a % sign */
-			/* TODO: if current_char is a % sign */
-			/*       (a) check if set next_char */
-			/*       (b) check if next_char is %, s or c */
-			/*           - if yes -> call va_arg and print */
-			/*           - if no  -> skip */
-
-			/* TODO: if current_char is not a % sign, print */
-
+			if (current_char == '%')
+			{
+				next_char = format[++i];
+				if (next_char == '%')
+					_putchar('%');
+				else if (next_char == 'c')
+					_putchar(va_arg(args, int));
+				else if (next_char == 's')
+					_print_string(va_arg(args, char *));
+				else if (next_char == '\0')
+					break;
+				i++;
+				continue;
+			}
+			_putchar(current_char);
 			i++;
 		}
 	}
-
 	va_end(args);
-
+	_putchar(-1);
 	return (n_printed);
 }
