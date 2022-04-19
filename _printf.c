@@ -22,7 +22,6 @@ int _printf(const char *format, ...)
 
 	while (format[i])
 	{
-		r = -1;
 		if (format[i] == '%')
 		{
 			f = get_func(&format[++i]);
@@ -31,7 +30,7 @@ int _printf(const char *format, ...)
 				r = f(args);
 				i++;
 			}
-			else if (format[i])
+			else
 				r = _putchar(format[i - 1]);
 		}
 		else
