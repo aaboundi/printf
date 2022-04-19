@@ -7,17 +7,17 @@
  */
 int print_str(va_list args)
 {
-	int j = 0, n = 0;
+	int n = 0;
 	char *str = va_arg(args, char *);
+	char *str_null = "(null)";
 
 	if (str == NULL)
-		return (-1);
+		str = str_null;
 
-	for (j = 0; str[j]; j++)
+	while (*str)
 	{
-		if (_putchar(str[j]) != -1)
+		if (_putchar(*str++) != -1)
 			n++;
 	}
-
 	return (n);
 }
