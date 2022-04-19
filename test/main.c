@@ -21,5 +21,6 @@ int main(void)
 
 	_printf("Percent:[%%]\n");
 	printf("Percent:[%%]\n");
+
 	return (0);
 }
