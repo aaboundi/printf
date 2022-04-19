@@ -39,6 +39,9 @@ int main(void)
     _printf("Len:[%d]\n", len);
     printf("Len:[%d]\n", len2);
     _printf("Unknown:[%r]\n");
+    len = _printf("");
+    len2 = printf(" ");
+    printf("len: %d, len2: %d\n", len, len2);
 /*    printf("Unknown:[%r]\n"); */
     return (0);
 }
