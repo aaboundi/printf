@@ -13,10 +13,8 @@ int print_str(va_list args)
 	if (str == NULL)
 		str = "(null)";
 
-	while (*str)
-	{
-		if (_putchar(*str++) != -1)
-			n++;
-	}
+	while (*str && _putchar(*str++) != -1)
+		n++;
+
 	return (n);
 }

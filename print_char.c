@@ -3,7 +3,7 @@
 /**
  * print_char - prints character
  * @args: argument
- * Return: character
+ * Return: 1 if success else -1 
  */
 int print_char(va_list args)
 {

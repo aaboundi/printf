@@ -30,8 +30,6 @@ int _printf(const char *format, ...)
 				r = f(args);
 				format++;
 			}
-			else
-				r = _putchar(*(format - 1));
 		}
 		else
 			r = _putchar(*format++);
