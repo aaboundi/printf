@@ -8,11 +8,19 @@
 */
 int main(void)
 {
+	int n_printed = 0;
+
 	_printf("Character:[%c]\n", 'c');
 	printf("Character:[%c]\n", 'c');
-	_printf("String:[%s]\n", "Hello world");
-	printf("String:[%s]\n", "Hello world");
+
+	n_printed = _printf("String:[%s]\n", "Hello world");
+	printf("Hello world  > n_printed: %d\n", n_printed);
+
+	n_printed = printf("String:[%s]\n", "Hello world");
+	printf("Hello world > n_printed: %d\n", n_printed);
+
 	_printf("Percent:[%%]\n");
 	printf("Percent:[%%]\n");
+
 	return (0);
 }
