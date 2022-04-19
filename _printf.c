@@ -13,35 +13,23 @@ int _printf(const char *format, ...)
 	va_list args;
 
 	va_start(args, format);
-	if (format == NULL || !format[i + 1])
-		return (-1);
-	while (format[i])
+	while (format && format[i])
 	{
-		if (format[i] == '%')
-		{
-			if (format[i + 1])
-			{
-				if (format[i + 1] != 'c' && format[i + 1] != 's' && format[i + 1] != '%')
-				{
-					n_printed += _putchar(format[i]);
-					n_printed += _putchar(format[i + 1]);
-					i++;
-				}
-				else
-				{
-					f = get_func(&format[i + 1]);
-					n_printed += f(args);
-					i++;
-				}
-			}
-		}
+		if (format[i] != '%')
+			n_printed += _putchar(format[i++]);
 		else
 		{
-			_putchar(format[i]);
-			n_printed++;
+			f = get_func(&format[++i]);
+			if (f != NULL)
+			{
+				n_printed += f(args);
+				i++;
+			}
+			else
+				n_printed += _putchar(format[i-1]);
 		}
-		i++;
 	}
 	va_end(args);
+
 	return (n_printed);
 }
