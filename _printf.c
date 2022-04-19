@@ -8,7 +8,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int n_printed = 0, r = 0;
+	int i = 0, n_printed = 0, r = 0;
 	int (*f)(va_list);
 	va_list args;
 
@@ -20,19 +20,22 @@ int _printf(const char *format, ...)
 		return (-1);
 	}
 
-	while (*format)
+	while (format[i])
 	{
-		if (*format == '%')
+		r = -1;
+		if (format[i] == '%')
 		{
-			f = get_func(++format);
+			f = get_func(&format[++i]);
 			if (f)
 			{
 				r = f(args);
-				format++;
+				i++;
 			}
+			else if (format[i])
+				r = _putchar(format[i - 1]);
 		}
 		else
-			r = _putchar(*format++);
+			r = _putchar(format[i++]);
 
 		if (r > 0)
 			n_printed += r;
