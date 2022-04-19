@@ -13,6 +13,8 @@ int (*get_func(const char *format))(va_list)
 		{"c", print_char},
 		{"s", print_str},
 		{"%", print_pct},
+		{"i", print_dec},
+		{"d", print_dec},
 		{NULL, NULL}
 	};
 	for (i = 0; p[i].t; i++)
