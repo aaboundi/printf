@@ -9,10 +9,9 @@ int print_str(va_list args)
 {
 	int n = 0;
 	char *str = va_arg(args, char *);
-	char *str_null = "(null)";
 
 	if (str == NULL)
-		str = str_null;
+		str = "(null)";
 
 	while (*str)
 	{

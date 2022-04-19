@@ -8,34 +8,38 @@
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, n_printed = 0, r = 0;
+	int n_printed = 0, r = 0;
 	int (*f)(va_list);
 	va_list args;
 
 	va_start(args, format);
-	if (format == NULL)
-		return (-1);
 
-	while (format[i] != '\0')
+	if (format == NULL)
 	{
-		if (format[i] != '%')
-			r = _putchar(format[i++]);
-		else
+		va_end(args);
+		return (-1);
+	}
+
+	while (*format)
+	{
+		if (*format == '%')
 		{
-			f = get_func(&format[++i]);
-			if (f != NULL)
+			f = get_func(++format);
+			if (f)
 			{
 				r = f(args);
-				i++;
+				format++;
 			}
 			else
-				r = _putchar(format[i - 1]);
+				r = _putchar(*(format - 1));
 		}
+		else
+			r = _putchar(*format++);
 
-		if (r != -1)
+		if (r > 0)
 			n_printed += r;
 	}
 	va_end(args);
-
 	return (n_printed);
+
 }
