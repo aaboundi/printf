@@ -8,33 +8,29 @@
  */
 int print_dec(va_list args)
 {
-	int n = 0, _n = 0;
+	int n = 0, _n = 0, a = 0;
 	int n_printed = 0;
-	int digit = 0;
+	unsigned int digit = 1;
 
 	n = va_arg(args, int);
 
 	if (n < 0)
 	{
-		n = -n;
-		if (_putchar('-') != -1)
-			n_printed++;
+		n_printed = n_printed + _putchar('-');
+		a = n * -1;
 	}
-
-	while (n > 0)
+	else
+		a = n;
+	_n = a;
+	while (_n > 9)
 	{
-		_n = _n * 10 + (n % 10);
-		n /= 10;
+		_n = _n / 10;
+		digit = digit * 10;
 	}
-
-	n = _n;
-
-	do {
-		digit = n % 10;
-		if (_putchar('0' + digit) != -1)
-			n_printed++;
-		n /= 10;
-	} while (n > 0);
-
+	while (digit >= 1)
+	{
+		n_printed = n_printed + _putchar(((a / digit) % 10) + '0');
+		digit = digit / 10;
+	}
 	return (n_printed);
 }
