@@ -13,9 +13,10 @@ int _printf(const char *format, ...)
 	va_list args;
 
 	va_start(args, format);
-	if (format == NULL || !format[i + 1])
+	if (format == NULL)
 		return (-1);
-	while (format && format[i])
+
+	while (format[i])
 	{
 		if (format[i] != '%')
 			r = _putchar(format[i++]);
