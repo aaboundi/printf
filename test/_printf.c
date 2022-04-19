@@ -24,8 +24,12 @@ int _printf(const char *format, ...)
 		{
 			f = get_func(&format[++i]);
 			if (f != NULL)
+			{
 				r = f(args);
-			i++;
+				i++;
+			}
+			else
+				r = _putchar(format[i - 1]);
 		}
 
 		if (r != -1)
