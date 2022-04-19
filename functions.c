@@ -38,5 +38,5 @@ int print_str(va_list args)
 int print_pct(va_list args)
 {
 	(void)args;
-	return (write(1, "%", 1));
+	return (_putchar('%'));
 }
