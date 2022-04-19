@@ -12,19 +12,12 @@ int _printf(const char *format, ...)
 	int (*f)(va_list);
 	va_list args;
 
+
+	if (!format)
+		return (-1);
+
+
 	va_start(args, format);
-
-	if (!format || (format[0] == '%' && !format[1]))
-	{
-		va_end(args);
-		return (-1);
-	}
-
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-	{
-		va_end(args);
-		return (-1);
-	}
 
 	while (format[i])
 	{
@@ -36,8 +29,14 @@ int _printf(const char *format, ...)
 				r = f(args);
 				i++;
 			}
-			else
+			else if (format[i] != ' ' && format[i])
 				r = _putchar(format[i - 1]);
+			else
+			{
+				va_end(args);
+				return (-1);
+			}
+
 		}
 		else
 			r = _putchar(format[i++]);
