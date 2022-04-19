@@ -39,7 +39,7 @@ int main(void)
     _printf("Len:[%d]\n", len);
     printf("Len:[%d]\n", len2);
     _printf("Unknown:[%r]\n");
-    
+#if 0 
     len = _printf("%s\n", NULL);
     len2 = printf("%s\n", NULL);
     printf("len: %d, len2: %d\n", len, len2);
@@ -52,6 +52,7 @@ int main(void)
     len = _printf("\0");
     len2 = printf("\0");
     printf("len: %d, len2: %d\n", len, len2);
+#endif
 
 /*    printf("Unknown:[%r]\n"); */
     return (0);
