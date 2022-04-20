@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
  * print_dec - print a integer read from va_list
@@ -8,29 +9,37 @@
  */
 int print_dec(va_list args)
 {
-	int n = 0, _n = 0, a = 0;
-	int n_printed = 0;
-	unsigned int digit = 1;
+	int n = 0, n_printed = 0, sign = 1;
+	int digit = 0;
+	int i = 0;
+	char buffer[20] = {0,};
 
 	n = va_arg(args, int);
 
 	if (n < 0)
 	{
-		n_printed = n_printed + _putchar('-');
-		a = n * -1;
+		sign = -1;
+		if (_putchar('-') != -1)
+			n_printed++;
 	}
-	else
-		a = n;
-	_n = a;
-	while (_n > 9)
+
+	i = -1;
+	while (n != 0)
 	{
-		_n = _n / 10;
-		digit = digit * 10;
+		buffer[++i] = n % 10;
+		n /= 10;
 	}
-	while (digit >= 1)
+
+	if (i == -1)
+		i = 0;
+
+	while (i >= 0)
 	{
-		n_printed = n_printed + _putchar(((a / digit) % 10) + '0');
-		digit = digit / 10;
+		digit = buffer[i] * sign;
+		if (_putchar('0' + digit) != -1)
+			n_printed++;
+		i--;
 	}
+
 	return (n_printed);
 }

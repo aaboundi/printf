@@ -20,8 +20,10 @@ int main(void)
     addr = (void *)0x7ffe637541f0;
     _printf("Length:[%d, %i]\n", len, len);
     printf("Length:[%d, %i]\n", len2, len2);
-    _printf("Negative:[%d]\n", -762534);
-    printf("Negative:[%d]\n", -762534);
+    _printf("Negative:[%d]\n", INT_MIN);
+    printf("Negative:[%d]\n", INT_MIN);
+    _printf("INT_MAX: [%d]\n", INT_MAX);
+    printf("INT_MAX: [%d]\n", INT_MAX);
     _printf("Unsigned:[%u]\n", ui);
     printf("Unsigned:[%u]\n", ui);
     _printf("Unsigned octal:[%o]\n", ui);
@@ -39,6 +41,9 @@ int main(void)
     _printf("Len:[%d]\n", len);
     printf("Len:[%d]\n", len2);
     _printf("Unknown:[%r]\n");
+    printf("%d\n", _printf("%"));
+    printf("%d\n", _printf("% "));
+
 #if 0 
     len = _printf("%s\n", NULL);
     len2 = printf("%s\n", NULL);
